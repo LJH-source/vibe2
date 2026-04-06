@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EW SYSTEMS | 생존을 위한 정밀 기술</title>
+    <style>
+        :root {
+            --primary-flare: #ff6b00; /* 플레어 오렌지 */
+            --primary-chaff: #00d4ff; /* 채프 사이언 */
+            --bg-deep: #05070a;
+            --bg-panel: #11141b;
+            --text-high: #ffffff;
+            --text-mid: #a0aec0;
+            --border: rgba(255, 255, 255, 0.1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background-color: var(--bg-deep);
+            color: var(--text-high);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* 부드러운 스크롤 */
+        html { scroll-behavior: smooth; }
+
+        /* 레이아웃 */
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+        
+        section {
+            padding: 120px 0;
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        section.reveal {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* 헤더/네비게이션 */
+        nav {
+            position: fixed;
+            top: 0; width: 100%;
+            padding: 25px 0;
+            background: rgba(5, 7, 10, 0.8);
+            backdrop-filter: blur(15px);
+            z-index: 1000;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav-content { display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-weight: 900; letter-spacing: 2px; font-size: 1.2rem; color: var(--primary-chaff); }
+        .nav-links a { 
+            color: var(--text-mid); 
+            text-decoration: none; 
+            margin-left: 30px; 
+            font-size: 0.85rem; 
+            text-transform: uppercase;
+            transition: color 0.3s;
+        }
+        .nav-links a:hover { color: var(--text-high); }
+
+        /* 히어로 섹션 */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: linear-gradient(rgba(5, 7, 10, 0.6), rgba(5, 7, 10, 0.9)),
+                        url('https://images.unsplash.com/photo-1517976547714-720226b864c1?auto=format&fit=crop&q=80&w=2000') center/cover;
+            opacity: 1; transform: none;
+        }
+
+        .hero h1 {
+            font-size: clamp(3rem, 10vw, 6rem);
+            font-weight: 900;
+            line-height: 1;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            font-style: italic;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--text-mid);
+            margin-bottom: 40px;
+            letter-spacing: 1px;
+        }
+
+        .scan-line {
+            width: 100px; height: 2px;
+            background: var(--primary-chaff);
+            margin: 0 auto 30px;
+            animation: pulse 2s infinite;
+        }
+
+        /* 데이터 카드 */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+            margin-top: 60px;
+        }
+
+        .card {
+            background: var(--bg-panel);
+            padding: 50px;
+            border-radius: 4px;
+            border-left: 4px solid var(--border);
+            transition: all 0.4s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card:hover {
+            border-left-color: var(--primary-chaff);
+            background: #1a1f29;
+            transform: scale(1.02);
+        }
+
+        .card.flare:hover { border-left-color: var(--primary-flare); }
+
+        .card h3 { 
+            font-size: 1.8rem; 
+            margin-bottom: 20px; 
+            letter-spacing: -0.5px;
+        }
+
+        .card p { color: var(--text-mid); font-size: 1rem; }
+
+        .tag {
+            display: inline-block;
+            padding: 4px 12px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 2px;
+            font-size: 0.7rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: var(--text-mid);
+        }
+
+        /* 푸터 */
+        footer {
+            padding: 80px 0;
+            text-align: center;
+            border-top: 1px solid var(--border);
+            color: var(--text-mid);
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+        }
+
+        @keyframes pulse {
+            0% { width: 50px; opacity: 0.5; }
+            50% { width: 150px; opacity: 1; }
+            100% { width: 50px; opacity: 0.5; }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            section { padding: 80px 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="container nav-content">
+            <div class="logo">EW-DEFENSE</div>
+            <div class="nav-links">
+                <a href="#tech">기술분석</a>
+                <a href="#systems">대응체계</a>
+                <a href="#contact">문의</a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="container">
+            <div class="scan-line"></div>
+            <h1>BEYOND<br>VISIBLE</h1>
+            <p>전자기 스펙트럼의 주도권이 전장의 승패를 결정합니다.</p>
+            <a href="#tech" class="btn" style="text-decoration: none; color: var(--primary-chaff); border: 1px solid var(--primary-chaff); padding: 12px 30px; font-weight: bold; font-size: 0.8rem; letter-spacing: 2px;">SYSTEM CHECK</a>
+        </div>
+    </header>
+
+    <section id="tech" class="container">
+        <div style="max-width: 600px;">
+            <span style="color: var(--primary-chaff); font-weight: bold; font-size: 0.9rem;">01. ELECTRONIC WARFARE</span>
+            <h2 style="font-size: 3rem; margin: 20px 0;">전투기 생존의 핵심,<br>비가시적 방패</h2>
+            <p style="color: var(--text-mid);">현대의 공중전은 단순히 미사일을 쏘는 것을 넘어, 적의 레이더망을 교란하고 유도 미사일의 추적을 무력화하는 전자기적 교전이 핵심입니다.</p>
+        </div>
+
+        <div class="grid">
+            <div class="card">
+                <div class="tag">RADAR DECOY</div>
+                <h3>Chaff (채프)</h3>
+                <p>알루미늄이나 유리섬유 조각을 공중에 살포하여 거대한 가짜 레이더 반사 신호를 생성합니다. 적의 레이더 유도 미사일(Semi-Active/Active Radar Homing)을 기만하여 조종사와 기체를 보호합니다.</p>
+            </div>
+            <div class="card flare">
+                <div class="tag" style="color: var(--primary-flare);">INFRARED COUNTERMEASURE</div>
+                <h3>Flare (플레어)</h3>
+                <p>마그네슘 기반의 고온 발화 물질을 사출하여 전투기의 엔진 열기보다 더 강한 적외선 신호를 발생시킵니다. 열 추적 미사일(IR Homing)의 센서를 교란하는 가장 확실한 수단입니다.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="systems" class="container" style="background: var(--bg-panel); border-radius: 8px; margin-bottom: 100px;">
+        <div style="text-align: center; padding: 0 40px;">
+            <h2 style="font-size: 2.5rem; margin-bottom: 20px;">RWR / MAWS INTEGRATION</h2>
+            <p style="max-width: 800px; margin: 0 auto; color: var(--text-mid);">
+                레이더 경보 수신기(RWR)와 미사일 접근 경보 시스템(MAWS)이 위협을 자동 감지하고, 최적화된 시퀀스에 따라 채프와 플레어를 살포합니다. 0.1초의 판단이 생사를 결정합니다.
+            </p>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>ADVANCED ELECTRONIC WARFARE SYSTEMS &copy; 2026</p>
+            <p style="margin-top: 10px; opacity: 0.5;">CLASSIFIED TECHNOLOGY BEYOND THE LIMITS</p>
+        </div>
+    </footer>
+
+    <script>
+        // 스크롤 시 섹션 나타나기 애니메이션
+        const revealSections = () => {
+            const sections = document.querySelectorAll('section');
+            const triggerBottom = window.innerHeight * 0.85;
+
+            sections.forEach(section => {
+                const sectionTop = section.getBoundingClientRect().top;
+                if(sectionTop < triggerBottom) {
+                    section.classList.add('reveal');
+                }
+            });
+        };
+
+        window.addEventListener('scroll', revealSections);
+        window.addEventListener('load', revealSections); // 초기 로드 시 체크
+
+        // 내비게이션 스타일 변경
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if(window.scrollY > 100) {
+                nav.style.padding = '15px 0';
+                nav.style.background = 'rgba(5, 7, 10, 0.95)';
+            } else {
+                nav.style.padding = '25px 0';
+                nav.style.background = 'rgba(5, 7, 10, 0.8)';
+            }
+        });
+    </script>
+</body>
+</html>
